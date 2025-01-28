@@ -33,21 +33,21 @@ function Dashboard() {
         }
     }, [useEffectRefresh]); 
 
-interface itemtype {
-    id?: number;
-    nombre: string;
-    marca: string;
-    tipo: string;
-    precio: number;
-}
+    interface itemtype {
+        id?: number;
+        nombre: string;
+        marca: string;
+        tipo: string;
+        precio: number;
+    }
 
-const itemInitialState: itemtype = {
-    nombre: '',
-    marca: '',
-    tipo: '',
-    precio: 0,
-};
-const [item, setItem] = useState<itemtype>(itemInitialState);
+    const itemInitialState: itemtype = {
+        nombre: '',
+        marca: '',
+        tipo: '',
+        precio: 0,
+    };
+    const [item, setItem] = useState<itemtype>(itemInitialState);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -72,7 +72,6 @@ const [item, setItem] = useState<itemtype>(itemInitialState);
             const result = await response.json();
 
             if (result.success) {
-            
                 setTableData(tableData.filter(item => item.id !== itemId)); 
                 setUseEffectRefresh(true); 
             } else {
@@ -91,7 +90,17 @@ const [item, setItem] = useState<itemtype>(itemInitialState);
                     <Grid2 size={6}><TextField label="Marca" value={item.marca} onChange={(e) => setItem({ ...item, marca: e.target.value })} required fullWidth /></Grid2>
                     <Grid2 size={6}><TextField label="Nombre" value={item.nombre} onChange={(e) => setItem({ ...item, nombre: e.target.value })} required fullWidth /></Grid2>
                     <Grid2 size={6}><TextField label="Tipo" value={item.tipo} onChange={(e) => setItem({ ...item, tipo: e.target.value })} required fullWidth /></Grid2>
-                    <Grid2 size={6}><TextField label="Precio" value={item.precio} onChange={(e) => setItem({ ...item, precio: parseFloat(e.target.value) || 0 })} required fullWidth /></Grid2>
+                    <Grid2 size={6}>
+                        <TextField 
+                            label="Precio" 
+                            value={item.precio} 
+                            onChange={(e) => setItem({ ...item, precio: parseFloat(e.target.value) || 0 })} 
+                            required 
+                            fullWidth 
+                            type="number" 
+                            inputProps={{ step: "0.01" }} // Permite decimales
+                        />
+                    </Grid2>
 
                     <Grid2 size={12}>
                         {rol === 'invitado' ? (
@@ -106,25 +115,25 @@ const [item, setItem] = useState<itemtype>(itemInitialState);
             </Box>
 
             <Box>
-                {rol === 'admin' && (
-                    <TableContainer component={Paper} sx={{ marginTop: "20px" }}>
-                        <Table>
-                            <TableHead sx={{ backgroundColor: "#0a2837" }}>
-                                <TableRow>
-                                    <TableCell sx={{ color: "white" }}>Nombre</TableCell>
-                                    <TableCell sx={{ color: "white" }}>Marca</TableCell>
-                                    <TableCell sx={{ color: "white" }}>Tipo</TableCell>
-                                    <TableCell sx={{ color: "white" }}>Precio</TableCell>
-                                    <TableCell></TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {tableData.map((row) => (
-                                    <TableRow key={row.id}>
-                                        <TableCell>{row.nombre}</TableCell>
-                                        <TableCell>{row.marca}</TableCell>
-                                        <TableCell>{row.tipo}</TableCell>
-                                        <TableCell>{row.precio}</TableCell>
+                <TableContainer component={Paper} sx={{ marginTop: "20px" }}>
+                    <Table>
+                        <TableHead sx={{ backgroundColor: "#0a2837" }}>
+                            <TableRow>
+                                <TableCell sx={{ color: "white" }}>Nombre</TableCell>
+                                <TableCell sx={{ color: "white" }}>Marca</TableCell>
+                                <TableCell sx={{ color: "white" }}>Tipo</TableCell>
+                                <TableCell sx={{ color: "white" }}>Precio</TableCell>
+                                {rol === 'admin' && <TableCell></TableCell>}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {tableData.map((row) => (
+                                <TableRow key={row.id}>
+                                    <TableCell>{row.nombre}</TableCell>
+                                    <TableCell>{row.marca}</TableCell>
+                                    <TableCell>{row.tipo}</TableCell>
+                                    <TableCell>{row.precio}</TableCell>
+                                    {rol === 'admin' && (
                                         <TableCell>
                                             <Tooltip title="Borrar registro" arrow>
                                                 <Button
@@ -136,12 +145,12 @@ const [item, setItem] = useState<itemtype>(itemInitialState);
                                                 </Button>
                                             </Tooltip>
                                         </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                )}
+                                    )}
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Box>
         </>
     );
