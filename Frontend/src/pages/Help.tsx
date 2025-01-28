@@ -17,8 +17,8 @@ const Ayuda: React.FC = () => {
           <Button
             variant="contained"
             color="primary"
-            href="Aqui va el pdf"
-            target="_blank" 
+            href="/ManualDeUsuarioDePabloVegaAlamo.pdf"
+            target="_blank"
             rel="noopener noreferrer"
           >
             Abrir Manual de Usuario
