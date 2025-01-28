@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, Paper, Button } from '@mui/material';
-import { Link } from 'react-router-dom'; // Importa Link de react-router-dom
+import { Link } from 'react-router-dom';
 import Menu from '../components/Menu';
 
 const Ayuda: React.FC = () => {
