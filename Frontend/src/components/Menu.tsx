@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, IconButton, Container,Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, AppBar, Toolbar, Drawer } from '@mui/material';
+import { Typography, IconButton, Container,Box, List,ListItem, ListItemButton, ListItemIcon, ListItemText, AppBar, Toolbar, Drawer } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import InboxIcon from '@mui/icons-material/Inbox';
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../store/authSlice';
 import { RootState } from '../store';
@@ -63,6 +64,20 @@ const DrawerList = (
               </ListItem>
             </Link>
           )}
+           <List>
+                {userRole == 'admin' ? (
+                    <ListItem disablePadding>
+                        <Link to='/GestionUsuarios' style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <InboxIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Gestión usuarios" />
+                            </ListItemButton>
+                        </Link>
+                    </ListItem>
+                ) : null}
+            </List>
            <Link to="/Ayuda" style={{ textDecoration: 'none', color: 'black' }}>
             <ListItem disablePadding>
               <ListItemButton>
