@@ -1,4 +1,3 @@
-//Credenciales de la base de datos
 const config = {
     db: {
         host: "localhost",
@@ -10,5 +9,4 @@ const config = {
     },
   }
   
-  //Exportamos config para poder usarlo en otro archivo
   module.exports = config;

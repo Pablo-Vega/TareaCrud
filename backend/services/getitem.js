@@ -28,7 +28,21 @@ async function getusers(req, res) {
     }
 }
 
+async function getdeval(req, res) {
+    try {
+        const rows = await db.query('SELECT * FROM deval');
+
+        const data = helper.emptyOrRows(rows);
+
+        return res.json({ data });
+    } catch (err) {
+        console.error('Error al obtener los datos: ', err.message);
+        return res.status(500).json({ message: 'Error al obtener los datos' });
+    }
+}
+
 module.exports = {
     getitem,
-    getusers
+    getusers,
+    getdeval
 }

@@ -16,7 +16,15 @@ async function insertUser(data) {
     const result = await db.query(query, values);
 }
 
+async function insertDeval(data) {
+    const query = `INSERT INTO deval(articulo, meses, devaluacion) VALUES (?, ?, ?)`;
+    const values = [data.articulo, data.meses, data.devaluacion];
+    
+    const result = await db.query(query, values);
+}
+
 module.exports = {
     insert,
-    insertUser
+    insertUser,
+    insertDeval
 }

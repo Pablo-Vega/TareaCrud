@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Reports from './pages/Reports';
 import ErrorPage from './pages/ErrorPage';
 import GestionUsuarios from './pages/GestionUsuarios';
+import GestionDeval from './pages/GestionDeval';
 import Ayuda from './pages/Help';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: 'GestionUsuarios',
         element: <GestionUsuarios />
+      },
+      {
+        path: 'GestionDeval',
+        element: <GestionDeval />
       },
       {
         path: 'Ayuda', 
